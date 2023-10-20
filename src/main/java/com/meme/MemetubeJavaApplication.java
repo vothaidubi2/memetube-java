@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.*")
-@EntityScan(basePackages = "com.entity")
+@EntityScan(basePackages = {"com.entity","com.dto"})
 @EnableJpaRepositories(basePackages = "com.dao")
 @EnableScheduling
 public class MemetubeJavaApplication {

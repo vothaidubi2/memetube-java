@@ -41,5 +41,6 @@ public class Comment{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Datecreated", length = 10)
 	private Date datecreated;
-
+	@Column(name = "Idbasecmt")
+	private Integer Idbasecmt;
 }

@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users", catalog = "memetube")
-public class Users{
+public class Users {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "Iduser", unique = true, nullable = false)
@@ -49,16 +49,18 @@ public class Users{
 	private Boolean status;
 	@Column(name = "Role")
 	private Boolean role;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@Column(name = "Avatar")
+	private String avatar;
+	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Channel> channels = new ArrayList<>();
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Rating> ratings = new ArrayList<>();
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Subscribe> subcribes = new ArrayList<>();
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Comment> comments = new ArrayList<>();
 }

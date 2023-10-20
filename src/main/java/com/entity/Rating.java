@@ -35,4 +35,5 @@ public class Rating{
 	private Video video;
 	@Column(name = "Rate")
 	private Boolean rate;
+	
 }
