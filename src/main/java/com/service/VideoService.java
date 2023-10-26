@@ -1,5 +1,8 @@
 package com.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dao.ChannelDAO;
 import com.dao.VideoDAO;
+import com.entity.Channel;
 import com.entity.Video;
 
 import jakarta.persistence.LockModeType;
@@ -17,12 +22,26 @@ import jakarta.persistence.LockModeType;
 public class VideoService {
 	@Autowired
 	VideoDAO videoDao;
+	@Autowired
+	ChannelDAO channelDAO;
 
 	@Autowired
 	private VideoQueue videoQueue;
 
 	public List<Video> getAllVideo() {
 		return videoDao.findAll();
+	}
+
+	public List<Integer> getAllByComment() {
+		return videoDao.getAllByComment();
+	}
+	
+	public List<Video> getAllVideoByIdcategory(int id) {
+		return videoDao.findByIdcategory(id);
+	}
+	public List<Video> getAllVideoByIdUser(int iduser) {
+		Channel channel = channelDAO.findByIdUser(iduser);
+		return videoDao.findByIdChannel(channel.getIdchannel());
 	}
 
 	public Video getOneVideo(int id) {
@@ -33,8 +52,20 @@ public class VideoService {
 		}
 	}
 	
+	public Video postVideo(Video video) {
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(currentDate);
+        Timestamp timestamp = Timestamp.valueOf(formattedDate);
+        video.setDatecreated(timestamp);
+		return videoDao.save(video);
+	}
+	
 	public List<Video> searchVideo(String input) {
 		return videoDao.findByTitleLike('%'+input+'%');
+	}
+	public void deleteVideo(int id) {
+		videoDao.deleteById(id);
 	}
 
 	@Transactional

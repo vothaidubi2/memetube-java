@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "memetube-fb4a6",
+  "private_key_id": "9364fb960c0d54c8d1a284e4d407c0b916e0c4e6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC22Rqc19nC3EoS\nvFJUXFXB7yGuCVzQ0cTo8RvOh4MTBIFpdmdB6hPjHlBPg5SrL0uS0ccSV0jYNMu5\new4Yf+jJXc6/x3IRcHig8eSC2PKS6PJ6lD3vQcwdL+QwchlbYffWsACcTxkHjpU+\n+JvlT2T0HvXO3bvHPoyfpMNgS+o/lt5WNmgLad16OV6vRDF0vKXKZygl09Y3SbGo\nYBnc9bN7vfzWkI4Cth1V/PGWt/6vUMcDB8GLXCZ5tiTAqP3B33PnE89XVM6pfPPB\ny4hSQEI6hPG5VR5frCtlpxK+aCkzUu/VNkYRVHgmQsut5J23U2QPljuqrvEnNt8S\nKZLChNA/AgMBAAECggEAE3OtPRpJdE1zI+Mc7xSTmvoRny4nzZ9DT3S2/JW2AAPu\nsIWEHqMEUpka+hqJalyxsYDXqL/YZAfZ1HWe3kRdQ27TW9uf6vMIIjcZlEH4LGDT\nyu6SWC2rxT8fC3hX8jzN3O0EY5yWkRM+FWDlVNPJbZ8Nj2BPZbblxuYEUu5AkVsR\nALTovIuyHMWxmNXCvMJqSEIDUeM/CtXcUJOJn8Am3BoenQZoC5vzd/uiosqEI1wd\nPZJZk3wZlzMG4MNqQHz5tQxDzIKBUOs93dIorqeXOEL9UEjiv+DfsWUHwd6IeZkJ\nesUfEh6+DSyKILiwwuTLYAqwc1JhAtSi8AeB9EdyQQKBgQD3heBw1Dj1CH1AXf5I\n+ffX9xkUYFVpCXPD425BANj/D2ZbBejRQtau/aQ+VGWoc1Hk5XhAqplyCdVaOWHh\nfsz0Gc4uYqZFBroTkc0MyHGR4mZ4hsD1I7mNJ4q23TNybbV4VgK260Id9jgUqSKI\nXTxf9hCOP7b+icJ7Kyb/2SmJ6QKBgQC9HDL09YXZl8g4zwUnGhV4+z5glvzZpFRF\nXPbCj6xAPLgsydyShdulbMt1e7Ttl30GemZDaugeNiJd/zBhlvcZppJpjl+ZhOzt\nEsPvZDKkAyUr+ArevcwnMSjNAzJHJLvBrMiRYTHsefiHPQ3QxwNAbxLN8ym5uxAC\ny3R5gqQH5wKBgQCpsYy3jacmxhUohcgJO+Ygl3UINSsZAbPt/gPeaLhb1LD1gk2k\n+U+5VIa/fJjdLYJdjLwuiUb9maQ9YM2sDIRybSafQl5/QCddtz1+oATMYQyjYK70\n4PMaxJsi1u+oaXJZ942Q3iTL6bt03qegGVuE5mtfOms4gjVkv6bTDIyf0QKBgHiy\nWsOFQJyUBzJazssaFsJUeIdlVpQCEdcDcmrTD/kfx9yuKZ1K2dlHCsQ85EkP+rf7\nvvEgdm1x15Vung5rL+KrMZ81Q0bUU/MrmupbZQbRCxR5B1cKhBYvhf7zH0/Q3hTK\nlmhTRG3NmxWVng+2NRkWy0WvAN6NybY+7GPxQYfZAoGAKzEamK3WGvk2vWoSHw+Y\nSI7g1D+psXVGvkrIXYa1/IVPblrKIWaMq3fCbmH3aoWqLJg5XcCVN1N3zMYm1U6B\n2B90/fL4YTEDCexxi8I7DsUdD+AmcN97LAzcpmaZQwhoEUqX357gL/G4n038tzzD\nnGXuQaswVphBpvkM3apt1Ek=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-k3pgu@memetube-fb4a6.iam.gserviceaccount.com",
+  "client_id": "104281382609377740465",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-k3pgu%40memetube-fb4a6.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

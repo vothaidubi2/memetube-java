@@ -1,6 +1,6 @@
 package com.entity;
+import java.sql.Timestamp;
 // Generated Oct 5, 2023, 8:54:31 AM by Hibernate Tools 4.3.6.Final
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,9 +50,8 @@ public class Video{
 	private String describes;
 	@Column(name = "Videourl")
 	private String videourl;
-	@Temporal(TemporalType.DATE)
-	@Column(name = "Datecreated", length = 10)
-	private Date datecreated;
+	@Column(name = "Datecreated", length = 19)
+	private Timestamp datecreated;
 	@Column(name = "Status")
 	private Boolean status;
 	@Column(name = "Viewcount")
