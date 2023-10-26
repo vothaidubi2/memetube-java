@@ -2,6 +2,6 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-catalog="memetube" match-name="playlist"/>
-  <table-filter match-catalog="memetube" match-name="pldetail"/>
+  <table-filter match-catalog="memetube" match-name="video"/>
+<!--   <table-filter match-catalog="memetube" match-name="pldetail"/> -->
 </hibernate-reverse-engineering>
