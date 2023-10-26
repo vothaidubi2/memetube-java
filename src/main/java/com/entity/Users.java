@@ -36,8 +36,6 @@ public class Users {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "Iduser", unique = true, nullable = false)
 	private Integer iduser;
-	@Column(name = "Username", length = 50)
-	private String username;
 	@Column(name = "Password")
 	private String password;
 	@Temporal(TemporalType.DATE)
@@ -51,6 +49,8 @@ public class Users {
 	private Boolean role;
 	@Column(name = "Avatar")
 	private String avatar;
+	@Column(name = "Google")
+	private Boolean google;
 	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Channel> channels = new ArrayList<>();
