@@ -48,5 +48,19 @@ public class authController {
         return ResponseEntity.ok(jwt);
     }
     }
+    @PostMapping("/addAccount")
+    public ResponseEntity<?> addAccount (@RequestBody Users user){
+    	userDetailsService.addUser(user);
+    	UserDto userdto=new UserDto();
+    	userdto.setEmail(user.getEmail());
+    	userdto.setIsGoogle(user.getGoogle());
+    	userdto.setPassword(user.getPassword());
+        String jwt = tokenProvider.createToken(userdto);
+    if(jwt.isEmpty()) {
+    	   return ResponseEntity.notFound().build();
+    }else {
+        return ResponseEntity.ok(jwt);
+    }
 
+    }
 }
