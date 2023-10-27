@@ -27,9 +27,13 @@ public class CommentRestController {
 	public ResponseEntity<List<Comment>> getAllBaseCmt(@RequestParam int idvideo){
 		return ResponseEntity.ok(cmtService.getAllBaseCmt(idvideo));
 	}
+	@GetMapping("/getallreplycmt")
+	public ResponseEntity<List<Comment>> getAllReplyCmt(@RequestParam int idvideo,@RequestParam int idbasecmt){
+		return ResponseEntity.ok(cmtService.getAllReplyCmt(idvideo,idbasecmt));
+	}
 	@PostMapping("/postcomment")
-	public ResponseEntity<HttpStatus> postComment(@RequestParam int idvideo,@RequestParam int iduser,@RequestParam String contents,@RequestParam String date){
-		cmtService.postComment(idvideo,iduser,contents,date);
+	public ResponseEntity<HttpStatus> postComment(@RequestParam int idvideo,@RequestParam int iduser,@RequestParam String contents){
+		cmtService.postComment(idvideo,iduser,contents);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }
