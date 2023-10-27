@@ -2,9 +2,10 @@ package com.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.entity.Users;
@@ -16,7 +17,7 @@ public class CusUserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private Users user;
 
-
+	
 
 
 
@@ -63,7 +64,14 @@ public class CusUserDetailsImpl implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<GrantedAuthority> role=new ArrayList<>();
+		System.err.println(user.getRole());
+		if(user.getRole()==true) {
+			role.add(new SimpleGrantedAuthority("ADMIN"));
+		}else {
+			role.add(new SimpleGrantedAuthority("USER"));
+		}
+		return role;
 	}
 }

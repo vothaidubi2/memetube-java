@@ -42,12 +42,7 @@ UserDAO dao;
 	        Date now = new Date();
 	        Date validity = new Date(now.getTime() + 3600000); // 1 hour
 	        Users user =new Users();
-	        System.err.println(userdto);
-	        if(userdto.getIsGoogle()==true) {
-	        	user=  dao.findByEmailAndGoogleTrue(userdto.getEmail());
-	        }else {
-	        	user=  dao.findByEmailAndGoogleFalse(userdto.getEmail());
-	        }
+	        	user=  dao.findByEmail(userdto.getEmail());
 	        Algorithm algorithm = Algorithm.HMAC256(secretKey);
 	        return JWT.create()
 	                .withIssuedAt(now)
