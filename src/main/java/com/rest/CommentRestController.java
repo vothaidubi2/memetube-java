@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,5 +36,10 @@ public class CommentRestController {
 	public ResponseEntity<HttpStatus> postComment(@RequestParam int idvideo,@RequestParam int iduser,@RequestParam String contents){
 		cmtService.postComment(idvideo,iduser,contents);
 		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	@DeleteMapping("/deletecomment")
+	public ResponseEntity<HttpStatus> deleteComment(@RequestParam int idcomment,@RequestParam int idbasecmt){
+		cmtService.deleteComment(idcomment, idbasecmt);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
