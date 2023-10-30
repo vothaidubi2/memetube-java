@@ -61,6 +61,10 @@ public class VideoService {
 		return videoDao.save(video);
 	}
 	
+	public Video updateVideo(Video video) {
+		return videoDao.save(video);
+	}
+	
 	public List<Video> searchVideo(String input) {
 		return videoDao.findByTitleLike('%'+input+'%');
 	}

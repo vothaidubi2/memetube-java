@@ -46,6 +46,12 @@ public class VideoRestController {
 	public ResponseEntity<Video> postVideo(@RequestBody Video video){
 		return ResponseEntity.status(HttpStatus.CREATED).body(videoService.postVideo(video));
 	}
+	
+	@PutMapping("/updatevideo")
+	public ResponseEntity<Video> updateVideo(@RequestBody Video video){
+		return ResponseEntity.status(HttpStatus.OK).body(videoService.updateVideo(video));
+	}
+
 
 	@GetMapping("/videobycate")
 	public ResponseEntity<Map<String, Object>> getAll(@RequestParam int cate) {

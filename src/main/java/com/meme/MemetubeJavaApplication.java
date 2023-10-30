@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.*")
+@ComponentScan(basePackages = {"com.*"})
 @EntityScan(basePackages = {"com.entity","com.dto"})
 @EnableJpaRepositories(basePackages = "com.dao")
 @EnableScheduling

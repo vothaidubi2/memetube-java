@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +20,15 @@ public interface CommentDAO extends JpaRepository<Comment, Integer> {
 	@Modifying
 	@Transactional
 	@Query(value = "insert into comment (idvideo,iduser,contents,datecreated,idbasecmt) value (?1,?2,?3,?4,null)",nativeQuery = true)
-	void postComment(int idVideo, int idUser, String contents, String date);
+	void postComment(int idVideo, int idUser, String contents, Timestamp date);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "delete from comment where idcomment=?1 ",nativeQuery = true)
+	void deleteBaseComment(int idcomment);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "delete from comment where idbasecmt=?1 and idcomment>0",nativeQuery = true)
+	void deleteReplyComment(int idbasecmt);
 }
