@@ -31,9 +31,15 @@ public class VideoService {
 	public List<Video> getAllVideo() {
 		return videoDao.findAll();
 	}
+	public Video getTop1Video() {
+		return videoDao.findTop1Video().get(0);
+	}
 
 	public List<Integer> getAllByComment() {
 		return videoDao.getAllByComment();
+	}
+	public int sumView() {
+		return videoDao.sumView();
 	}
 	
 	public List<Video> getAllVideoByIdcategory(int id) {

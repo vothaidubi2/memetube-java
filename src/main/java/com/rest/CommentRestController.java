@@ -37,6 +37,11 @@ public class CommentRestController {
 		cmtService.postComment(idvideo,iduser,contents);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+	@PostMapping("/postreplycomment")
+	public ResponseEntity<HttpStatus> postReplyComment(@RequestParam int idvideo,@RequestParam int iduser,@RequestParam String contents,@RequestParam int idbasecmt){
+		cmtService.postReplyComment(idvideo,iduser,contents,idbasecmt);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 	@DeleteMapping("/deletecomment")
 	public ResponseEntity<HttpStatus> deleteComment(@RequestParam int idcomment,@RequestParam int idbasecmt){
 		cmtService.deleteComment(idcomment, idbasecmt);

@@ -15,9 +15,4 @@ public interface UserDAO extends JpaRepository<Users, Integer> {
 	public Users findByEmailAndGoogleFalse(String email);
 
 	public Users findByEmailAndGoogleTrue(String email);
-	
-	@Modifying
-	@Transactional
-	@Query(value = "UPDATE users set balance=?1 where iduser=?2",nativeQuery = true)
-	void updateBalance(Double balance,int iduser);
 }
