@@ -1,6 +1,5 @@
 package com.service;
 
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,43 +30,46 @@ public class UserService implements UserDetailsService {
 	public BCryptPasswordEncoder psE() {
 		return new BCryptPasswordEncoder();
 	}
+
 	@Autowired
 	private UserDAO dao;
+	
+	public Users getByEmail(String email) {
+		return dao.findByEmail(email);
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		//load user form database
-		Users user= dao.findByEmail(username);
-		if(user==null) {
+		// load user form database
+		Users user = dao.findByEmail(username);
+		if (user == null) {
 			throw new UsernameNotFoundException("User not found");
-		}else {
-			return new  CusUserDetailsImpl(user);
+		} else {
+			return new CusUserDetailsImpl(user);
 		}
 
 	}
+
 	public void addUser(Users user) {
-    	if(user.getStatus()==true) {
-		if(user.getGoogle()==true) {
-    		if(dao.findByEmailAndGoogleTrue(user.getEmail())==null){
-    			Date currentDate = new Date();
-    	        user.setDatecreated(currentDate);
-    			user.setPassword(psE().encode(user.getPassword()));
-    			dao.save(user);
-    		}
-		}else {
-    		if(dao.findByEmailAndGoogleFalse(user.getEmail())==null) {
-    			Date currentDate = new Date();
-    	        user.setDatecreated(currentDate);
-    			user.setPassword(psE().encode(user.getPassword()));
-        		dao.save(user);
-        	
-    		}
+		if (user.getStatus() == true) {
+			if (user.getGoogle() == true) {
+				if (dao.findByEmailAndGoogleTrue(user.getEmail()) == null) {
+					Date currentDate = new Date();
+					user.setDatecreated(currentDate);
+					user.setPassword(psE().encode(user.getPassword()));
+					dao.save(user);
+				}
+			} else {
+				if (dao.findByEmailAndGoogleFalse(user.getEmail()) == null) {
+					Date currentDate = new Date();
+					user.setDatecreated(currentDate);
+					user.setPassword(psE().encode(user.getPassword()));
+					dao.save(user);
+				}
+			}
 		}
-
-
-
-    	}
-
 	}
+
 	public Users getOneUser(String usernmae) {
 		return dao.findByEmail(usernmae);
 	}
@@ -90,4 +92,6 @@ public class UserService implements UserDetailsService {
 
 
 
+
+}
 

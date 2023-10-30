@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.Users;
+import com.entity.Wallet;
 import com.service.UserService;
 import com.service.WalletService;
 
@@ -24,20 +25,34 @@ public class WalletRestController {
 	@Autowired
 	UserService userService;
 
-	@PutMapping("/updatebalance")
-	public ResponseEntity<HttpStatus> updateBalance(@RequestParam Double balance, @RequestParam int iduser) {
-		if(walletService.findByidUser(iduser) !=null) {
-			walletService.updateBalance(balance, iduser);
-			return ResponseEntity.ok().build();			
-		}else {
+	@PutMapping("/depositmoney")
+	public ResponseEntity<HttpStatus> depositBalance(@RequestParam int iduser,@RequestParam Double amount) {
+		if (walletService.findByidUser(iduser) != null) {
+			Double newbalance = walletService.findByidUser(iduser).getBalance() + amount;
+			walletService.updateBalance(newbalance, iduser);
+			return ResponseEntity.ok().build();
+		} else {
+			walletService.postBalance(iduser,amount);
+			return ResponseEntity.ok().build();
+		}
+	}
+
+	@PutMapping("/sendmoney")
+	public ResponseEntity<HttpStatus> sendBalance(@RequestParam Double amount, @RequestParam int iduser) {
+		if (walletService.findByidUser(iduser) != null) {
+			Double newbalance = walletService.findByidUser(iduser).getBalance() - amount;
+			walletService.updateBalance(newbalance, iduser);
+			return ResponseEntity.ok().build();
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	@GetMapping("/findUserById")
-	public ResponseEntity<Users> findByIdUser(@RequestParam int iduser) {
-		if(walletService.findByidUser(iduser) !=null) {
-			return ResponseEntity.ok(walletService.findByidUser(iduser));			
-		}else {
+
+	@GetMapping("/findwalletbyiduser")
+	public ResponseEntity<Wallet> findByIdUser(@RequestParam int iduser) {
+		if (walletService.findByidUser(iduser) != null) {
+			return ResponseEntity.ok(walletService.findByidUser(iduser));
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}

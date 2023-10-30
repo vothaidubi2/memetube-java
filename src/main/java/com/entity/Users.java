@@ -51,8 +51,6 @@ public class Users {
 	private String avatar;
 	@Column(name = "Google")
 	private Boolean google;
-	@Column(name = "Balance")
-	private Double balance;
 	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Channel> channels = new ArrayList<>();

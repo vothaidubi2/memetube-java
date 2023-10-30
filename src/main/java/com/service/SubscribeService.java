@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ public class SubscribeService {
 
 	public Subscribe getSubInfo(int idUser, int idChannel) {
 		return dao.findByIduserAndIdchannel(idUser, idChannel);
+	}
+	
+	public List<Subscribe> getAllByIdChannel(int idChannel) {
+		return dao.findByIdchannel(idChannel);
 	}
 
 	public void addSub(int idUser,int idChannel) {

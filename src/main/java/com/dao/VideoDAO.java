@@ -24,6 +24,11 @@ public interface VideoDAO extends JpaRepository<Video, Integer> {
 
 	@Query(value = "SELECT * FROM memetube.video where idchannel=?1", nativeQuery = true)
 	List<Video> findByIdChannel(int id);
+	@Query(value = "select * from video order by viewcount desc", nativeQuery = true)
+	List<Video> findTop1Video();
+
+	@Query(value = "SELECT sum(viewcount) FROM memetube.video;", nativeQuery = true)
+	int sumView();
 
 	@Query(value = "SELECT video.idvideo FROM video join comment on video.idvideo = comment.idvideo group by idvideo;", nativeQuery = true)
 	List<Integer> getAllByComment();

@@ -1,5 +1,7 @@
 package com.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,15 @@ public class SubscribeRestController {
 	public ResponseEntity<Subscribe> getSubInfo(@RequestParam int iduser, @RequestParam int idchannel) {
 		if (service.getSubInfo(iduser, idchannel) != null) {
 			return ResponseEntity.ok(service.getSubInfo(iduser, idchannel));
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping("/getallsubscribe")
+	public ResponseEntity<List<Subscribe>> gettByIdChannel(@RequestParam int idchannel) {
+		if (service.getAllByIdChannel(idchannel) != null) {
+			return ResponseEntity.ok(service.getAllByIdChannel(idchannel));
 		} else {
 			return ResponseEntity.notFound().build();
 		}

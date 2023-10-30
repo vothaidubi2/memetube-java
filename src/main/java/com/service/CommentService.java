@@ -36,4 +36,12 @@ public class CommentService {
 		Timestamp timestamp = Timestamp.valueOf(formattedDate);
 		dao.postComment(idVideo, idUser, contents, timestamp);
 	}
+	
+	public void postReplyComment(int idVideo, int idUser, String contents,int idbasecmt) {
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formattedDate = dateFormat.format(currentDate);
+		Timestamp timestamp = Timestamp.valueOf(formattedDate);
+		dao.postReplyComment(idVideo, idUser, contents, timestamp,idbasecmt);
+	}
 }

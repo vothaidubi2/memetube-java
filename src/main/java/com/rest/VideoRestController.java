@@ -36,22 +36,31 @@ public class VideoRestController {
 		response.put("data", videoService.getAllVideo());
 		return ResponseEntity.ok(response);
 	}
-	
+
+	@GetMapping("/sumviewvideo")
+	public ResponseEntity<Integer> countView() {
+		return ResponseEntity.ok(videoService.sumView());
+	}
+
+	@GetMapping("/gettop1video")
+	public ResponseEntity<Video> getTop1Video() {
+		return ResponseEntity.status(HttpStatus.OK).body(videoService.getTop1Video());
+	}
+
 	@GetMapping("/listvideobycomment")
 	public ResponseEntity<List<Integer>> getAllByComment() {
 		return ResponseEntity.ok(videoService.getAllByComment());
 	}
-	
+
 	@PostMapping("/postvideo")
-	public ResponseEntity<Video> postVideo(@RequestBody Video video){
+	public ResponseEntity<Video> postVideo(@RequestBody Video video) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(videoService.postVideo(video));
 	}
-	
+
 	@PutMapping("/updatevideo")
-	public ResponseEntity<Video> updateVideo(@RequestBody Video video){
+	public ResponseEntity<Video> updateVideo(@RequestBody Video video) {
 		return ResponseEntity.status(HttpStatus.OK).body(videoService.updateVideo(video));
 	}
-
 
 	@GetMapping("/videobycate")
 	public ResponseEntity<Map<String, Object>> getAll(@RequestParam int cate) {
@@ -87,6 +96,7 @@ public class VideoRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+
 	@DeleteMapping("/deletevideo")
 	public ResponseEntity<HttpStatus> deleteVideo(@RequestParam int id) {
 		if (videoService.getOneVideo(id) != null) {

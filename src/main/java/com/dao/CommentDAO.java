@@ -24,6 +24,12 @@ public interface CommentDAO extends JpaRepository<Comment, Integer> {
 	
 	@Modifying
 	@Transactional
+	@Query(value = "insert into comment (idvideo,iduser,contents,datecreated,idbasecmt) value (?1,?2,?3,?4,?5)",nativeQuery = true)
+	void postReplyComment(int idVideo, int idUser, String contents, Timestamp date,int idbasecmt);
+	
+	
+	@Modifying
+	@Transactional
 	@Query(value = "delete from comment where idcomment=?1 ",nativeQuery = true)
 	void deleteBaseComment(int idcomment);
 	
