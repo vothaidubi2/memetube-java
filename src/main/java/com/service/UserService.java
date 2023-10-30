@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dao.UserDAO;
 import com.dto.UserDto;
@@ -67,10 +68,22 @@ public class UserService implements UserDetailsService {
     	}
 
 	}
-//	public Users getUserByEmail(String usernmae) {
-//return dao.
-//
-//	}
+	public Users getOneUser(String usernmae) {
+		return dao.findByEmail(usernmae);
+	}
+	public Users Update( int id, String password, String oldPassword, String image) {
+	Users tempUser=	dao.findById(id).get();
+	System.err.println( image);
+	if (!psE().matches(oldPassword,tempUser.getPassword())) {
+		return null;
+	}
+	tempUser.setAvatar(image);
+	tempUser.setPassword(psE().encode(password));
+	dao.save(tempUser);
+	return tempUser;
+		
+	}
+	
 	}
 
 

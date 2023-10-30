@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +52,9 @@ public class authController {
     }
     @PostMapping("/addAccount")
     public ResponseEntity<?> addAccount (@RequestBody Users user){
+    	
     	userDetailsService.addUser(user);
+
     	UserDto userdto=new UserDto();
     	userdto.setEmail(user.getEmail());
     	userdto.setIsGoogle(user.getGoogle());
@@ -63,4 +67,22 @@ public class authController {
     }
 
     }
+    @GetMapping("/checkUser")
+    public ResponseEntity<?> checkUser (@RequestParam String username){
+    	if(userDetailsService.getOneUser(username)!=null) {
+    		return ResponseEntity.ok().build();
+    	}else {
+    		return ResponseEntity.notFound().build();
+    	}
+
+    }
+    @PutMapping("/updateUser")
+    public ResponseEntity<?> update (@RequestParam int id,@RequestParam String password,@RequestParam String oldPassword,@RequestParam String image ){
+    	if(userDetailsService.Update(id,password,oldPassword,image)==null) {
+	return ResponseEntity.notFound().build();
+}else {
+	return   ResponseEntity.ok().build();
+}
+    }
+    
 }
