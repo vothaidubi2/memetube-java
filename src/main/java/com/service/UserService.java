@@ -3,6 +3,7 @@ package com.service;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dao.UserDAO;
 import com.dto.UserDto;
@@ -68,4 +70,51 @@ public class UserService implements UserDetailsService {
 			}
 		}
 	}
-}
+
+	public Users getOneUser(String email) {
+		return dao.findByEmailAndGoogleFalse(email);
+	}
+	public Users Update( int id, String password, String oldPassword, String image) {
+
+	Users tempUser=	dao.findById(id).get();
+	System.err.println(psE().matches(oldPassword,tempUser.getPassword()));
+	if (psE().matches(oldPassword,tempUser.getPassword())) {
+		tempUser.setAvatar(image);
+		tempUser.setPassword(psE().encode(password));
+		dao.save(tempUser);
+		return tempUser;
+		
+	}else {
+		return null;
+	}
+
+		
+	}
+	public Users UpdateStatus(int id,Boolean status) {
+		Users tempUser=	dao.findById(id).get();
+		tempUser.setStatus(status);
+		dao.save(tempUser);
+		return tempUser;
+	}
+	public Users UpdateRole(int id,Boolean role) {
+		System.err.println(role);
+		Users tempUser=	dao.findById(id).get();
+		tempUser.setRole(role);
+		dao.save(tempUser);
+		return tempUser;
+	}
+	public Users forgotPassword(String email,  String password) {
+	Users tempUser=	dao.findByEmailAndGoogleFalse(email);
+	tempUser.setPassword(psE().encode(password));
+	dao.save(tempUser);
+	return tempUser;
+		
+	}
+	public List<Users> getAllUser(){
+		return dao.findAll();
+	}
+	
+	}
+
+
+

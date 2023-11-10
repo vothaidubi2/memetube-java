@@ -53,6 +53,7 @@ UserDAO dao;
 	                .withClaim("Iduser", user.getIduser())
 	                .withClaim("Role", user.getRole())
 	                .withClaim("Status", user.getStatus())
+	                .withClaim("Google", user.getGoogle())
 	                .withClaim("Datecreate", user.getDatecreated().toString())
 	                .sign(algorithm);
 	    }
