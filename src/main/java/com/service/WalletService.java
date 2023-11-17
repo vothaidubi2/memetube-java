@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,8 @@ public class WalletService {
 
 	public Wallet findByidUser(int idUser) {
 		return walletDao.findWalletByIdUser(idUser);
+	}
+	public List<Wallet> getAll() {
+		return walletDao.findAll();
 	}
 }

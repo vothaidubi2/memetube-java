@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.dao.UserDAO;
-import com.dto.UserDto;
+import com.dto.UserLoginDto;
 import com.entity.Users;
 
 import jakarta.annotation.PostConstruct;
@@ -38,7 +38,7 @@ UserDAO dao;
 	        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
 	    }
 
-	    public String createToken(UserDto userdto) {
+	    public String createToken(UserLoginDto userdto) {
 	        Date now = new Date();
 	        Date validity = new Date(now.getTime() + 3600000); // 1 hour
 	        Users user =new Users();

@@ -33,6 +33,8 @@ public class Category{
 	private Integer idcategory;
 	@Column(name = "Name", length = 100)
 	private String name;
+	@Column(name = "Status")
+	private Boolean status;
 	@OneToMany(mappedBy = "category")
 	@JsonIgnore
 	private List<Video> videos = new ArrayList<>();
