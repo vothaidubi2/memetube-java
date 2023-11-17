@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dao.UserDAO;
 import com.dto.UserDto;
+import com.dto.UserLoginDto;
 import com.entity.Users;
 import com.impl.CusUserDetailsImpl;
 
@@ -34,7 +35,6 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserDAO dao;
-	
 	public Users getByEmail(String email) {
 		return dao.findByEmail(email);
 	}
@@ -110,10 +110,10 @@ public class UserService implements UserDetailsService {
 	return tempUser;
 		
 	}
-	public List<Users> getAllUser(){
-		return dao.findAll();
+	public List<UserDto> getAllUser(){
+		return dao.findAllUserBalance();
 	}
-	
+
 	}
 
 

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.dto.UserDto;
+import com.dto.UserLoginDto;
 import com.entity.Users;
 import com.service.JwtTokenProviderService;
 import com.service.UserService;
@@ -41,42 +41,49 @@ public class authController {
 	private UserService userDetailsService;
 
 	@PostMapping("/authenticate")
-	public ResponseEntity<?> authenticateUser(@RequestBody UserDto loginRequest) {
-
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-
-		String jwt = tokenProvider.createToken(loginRequest);
-		if (jwt.isEmpty()) {
+	public ResponseEntity<?> authenticateUser(@RequestBody UserLoginDto loginRequest) {
+		if(userDetailsService.getByEmail(loginRequest.getEmail()).getStatus()==false) {
 			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(jwt);
+		}else {
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+			
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			String jwt = tokenProvider.createToken(loginRequest);
+			if (jwt.isEmpty()) {
+				return ResponseEntity.notFound().build();
+			} else {
+				return ResponseEntity.ok(jwt);
+			}
 		}
+
 	}
 
 	@PostMapping("/addAccount")
 	public ResponseEntity<?> addAccount(@RequestBody Users user) {
-
-		userDetailsService.addUser(user);
-
-		UserDto userdto = new UserDto();
-		userdto.setEmail(user.getEmail());
-		userdto.setIsGoogle(user.getGoogle());
-		userdto.setPassword(user.getPassword());
-		String jwt = tokenProvider.createToken(userdto);
-		if (jwt.isEmpty()) {
+		if(userDetailsService.getByEmail(user.getEmail()).getStatus()==false) {
 			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(jwt);
+		}else {
+			userDetailsService.addUser(user);
+
+			UserLoginDto userdto = new UserLoginDto();
+			userdto.setEmail(user.getEmail());
+			userdto.setIsGoogle(user.getGoogle());
+			userdto.setPassword(user.getPassword());
+			String jwt = tokenProvider.createToken(userdto);
+			if (jwt.isEmpty()) {
+				return ResponseEntity.notFound().build();
+			} else {
+				return ResponseEntity.ok(jwt);
+			}
 		}
+
 
 	}
 
 	@GetMapping("/getOneUserByGoogleFalse")
 	public ResponseEntity<?> getOneUserByGoogleFalse(@RequestParam String username) {
-		System.err.println(username);
 		if (userDetailsService.getOneUser(username) != null) {
 			return ResponseEntity.ok().build();
 		} else {
@@ -86,7 +93,6 @@ public class authController {
 	}
 	@GetMapping("/getOneUser")
 	public ResponseEntity<?> getOneUser(@RequestParam String username) {
-		System.err.println(username);
 		if (userDetailsService.getByEmail(username) != null) {
 			return ResponseEntity.ok().build();
 		} else {
@@ -97,8 +103,7 @@ public class authController {
 	@GetMapping("/getAllUser")
 	public ResponseEntity<?> getAllUser() {
 		Map<String, Object> response = new HashMap<>();
-		response.put("countUser", userDetailsService.getAllUser().size());
-		response.put("data",  userDetailsService.getAllUser());
+		response.put("data", userDetailsService.getAllUser());
 		return ResponseEntity.ok(response);
 
 	}
@@ -127,7 +132,7 @@ public class authController {
 			return ResponseEntity.notFound().build();
 		} else {
 
-			UserDto userdto = new UserDto();
+			UserLoginDto userdto = new UserLoginDto();
 			userdto.setEmail(user.getEmail());
 			userdto.setIsGoogle(user.getGoogle());
 			userdto.setPassword(user.getPassword());

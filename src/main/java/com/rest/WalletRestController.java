@@ -1,5 +1,7 @@
 package com.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,16 @@ public class WalletRestController {
 			walletService.postBalance(iduser,amount);
 			return ResponseEntity.ok().build();
 		}
+	}	@PutMapping("/updatemoney")
+	public ResponseEntity<HttpStatus> updatemoney(@RequestParam int iduser,@RequestParam Double amount) {
+		if (walletService.findByidUser(iduser) != null) {
+			Double newbalance = amount;
+			walletService.updateBalance(newbalance, iduser);
+			return ResponseEntity.ok().build();
+		} else {
+			walletService.postBalance(iduser,amount);
+			return ResponseEntity.ok().build();
+		}
 	}
 
 	@PutMapping("/sendmoney")
@@ -55,5 +67,11 @@ public class WalletRestController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	@GetMapping("/getAllWaller")
+	public ResponseEntity<List<Wallet>> getAll() {
+
+			return ResponseEntity.ok(walletService.getAll());
+		
 	}
 }
