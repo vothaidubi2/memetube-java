@@ -29,14 +29,23 @@ public class VideoService {
 	private VideoQueue videoQueue;
 
 	public List<Video> getAllVideo() {
+		return videoDao.getAllVideo();
+	}
+	public List<Video> getAll() {
 		return videoDao.findAll();
 	}
 	public Video getTop1Video() {
 		return videoDao.findTop1Video().get(0);
 	}
+	public List<Video> findTop10Video() {
+		return videoDao.findTop10Video();
+	}
 
 	public List<Integer> getAllByComment() {
 		return videoDao.getAllByComment();
+	}
+	public List<Integer> getAllByCommentChannel(int idchannel) {
+		return videoDao.getAllByCommentChannel(idchannel);
 	}
 	public int sumView() {
 		return videoDao.sumView();
@@ -72,7 +81,10 @@ public class VideoService {
 	}
 	
 	public List<Video> searchVideo(String input) {
-		return videoDao.findByTitleLike('%'+input+'%');
+		return videoDao.findByTitle('%'+input+'%');
+	}
+	public List<Video> showListSearch(String input) {
+		return videoDao.showListSearch('%'+input+'%');
 	}
 	public void deleteVideo(int id) {
 		videoDao.deleteById(id);
