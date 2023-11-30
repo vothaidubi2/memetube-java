@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "subcribe", catalog = "memetube")
+@Table(name = "subscribe", catalog = "memetube")
 public class Subscribe{
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

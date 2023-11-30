@@ -36,6 +36,13 @@ public class VideoRestController {
 		response.put("data", videoService.getAllVideo());
 		return ResponseEntity.ok(response);
 	}
+	@GetMapping("/admin/listvideo")
+	public ResponseEntity<Map<String, Object>> getAllVideo() {
+		Map<String, Object> response = new HashMap<>();
+		response.put("total", videoService.getAll().size());
+		response.put("data", videoService.getAll());
+		return ResponseEntity.ok(response);
+	}
 
 	@GetMapping("/sumviewvideo")
 	public ResponseEntity<Integer> countView() {
@@ -46,10 +53,18 @@ public class VideoRestController {
 	public ResponseEntity<Video> getTop1Video() {
 		return ResponseEntity.status(HttpStatus.OK).body(videoService.getTop1Video());
 	}
+	@GetMapping("/gettop10video")
+	public ResponseEntity<List<Video>> getTop10Video() {
+		return ResponseEntity.status(HttpStatus.OK).body(videoService.findTop10Video());
+	}
 
 	@GetMapping("/listvideobycomment")
 	public ResponseEntity<List<Integer>> getAllByComment() {
 		return ResponseEntity.ok(videoService.getAllByComment());
+	}
+	@GetMapping("/listvideobycommentchannel")
+	public ResponseEntity<List<Integer>> getAllByCommentChannel(@RequestParam int idchannel) {
+		return ResponseEntity.ok(videoService.getAllByCommentChannel(idchannel));
 	}
 
 	@PostMapping("/postvideo")
@@ -84,6 +99,15 @@ public class VideoRestController {
 		Map<String, Object> response = new HashMap<>();
 		response.put("total", videoService.searchVideo(search).size());
 		response.put("data", videoService.searchVideo(search));
+
+		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/admin/searchvideo")
+	public ResponseEntity<Map<String, Object>> showListSearch(@RequestParam String search) {
+		Map<String, Object> response = new HashMap<>();
+		response.put("total", videoService.showListSearch(search).size());
+		response.put("data", videoService.showListSearch(search));
 
 		return ResponseEntity.ok(response);
 	}

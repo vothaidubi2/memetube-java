@@ -32,6 +32,10 @@ public class CommentRestController {
 	public ResponseEntity<List<Comment>> getAllReplyCmt(@RequestParam int idvideo,@RequestParam int idbasecmt){
 		return ResponseEntity.ok(cmtService.getAllReplyCmt(idvideo,idbasecmt));
 	}
+	@GetMapping("/gettotalcommentfordaterange")
+	public ResponseEntity<Object> getTotalCommentForDateRange(@RequestParam String datestart,@RequestParam String dateend){
+		return ResponseEntity.ok(cmtService.getTotalCommentForDateRange(datestart, dateend));
+	}
 	@PostMapping("/postcomment")
 	public ResponseEntity<HttpStatus> postComment(@RequestParam int idvideo,@RequestParam int iduser,@RequestParam String contents){
 		cmtService.postComment(idvideo,iduser,contents);
