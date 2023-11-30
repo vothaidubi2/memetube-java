@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
-
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -19,21 +17,30 @@ import java.util.Date;
 public class Report {
 
     @Id
-	@GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Idreport")
     private Integer idreport;
-    
-    @ManyToOne
-    @JoinColumn(name = "Iduserreport")
-    private Users userReported;
 
-    @ManyToOne
-    @JoinColumn(name = "Idreportedchannel")
-    private Channel reportedChannel;
 
     @Column(name = "Datecreate")
     private Timestamp datecreate;
 
     @Column(name = "Status")
     private Boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "Idchannel")
+    private Channel channel;
+
+    @ManyToOne
+    @JoinColumn(name = "Idcomment")
+    private Comment comment;
+
+    @ManyToOne
+    @JoinColumn(name = "Idvideo")
+    private Video video;
+
+    @ManyToOne
+    @JoinColumn(name = "Iduserreport")
+    private Users userReport;
 }

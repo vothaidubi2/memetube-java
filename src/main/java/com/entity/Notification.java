@@ -18,33 +18,30 @@ import java.util.Date;
 @Table(name = "notification", catalog = "memetube")
 public class Notification {
 
-    @Id
+	@Id
 	@GeneratedValue(strategy = IDENTITY)
-    @Column(name = "Idnotification")
-    private Integer idnotification;
+	@Column(name = "Idnotification")
+	private Integer idnotification;
+	@ManyToOne
+	@JoinColumn(name = "Iduser")
+	private Users user;
 
-    @Column(name = "Iduser")
-    private Integer iduser;
+	@Column(name = "Title", length = 100)
+	private String title;
 
-    @Column(name = "Title", length = 100)
-    private String title;
+	@Column(name = "Contents", length = 200)
+	private String contents;
 
-    @Column(name = "Contents", length = 200)
-    private String contents;
+	@Column(name = "Datecreate")
+	private Timestamp datecreate;
 
-    @Column(name = "Datecreate")
-    private Timestamp datecreate;
+	@Column(name = "Checked")
+	private Boolean checked;
 
-    @Column(name = "Checked")
-    private Boolean checked;
+	@Column(name = "Redirecturl", length = 100)
+	private String redirecturl;
 
-    @Column(name = "Redirecturl", length = 100)
-    private String redirecturl;
+	@Column(name = "Status")
+	private Boolean status;
 
-    @Column(name = "Status")
-    private Boolean status;
-
-    @ManyToOne
-    @JoinColumn(name = "Iduser")
-    private Users user;
 }
