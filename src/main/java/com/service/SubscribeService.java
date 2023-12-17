@@ -1,5 +1,7 @@
 package com.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,15 @@ public class SubscribeService {
 	}
 
 	public void addSub(int idUser,int idChannel) {
-		dao.addSub(idUser, idChannel);
+		 Date currentDate = new Date();
+	        Timestamp timestamp = new Timestamp(currentDate.getTime());
+		dao.addSub(idUser, idChannel,timestamp);
 	}
 	
 	public void deleteSub(int idUser, int idChannel) {
 		dao.deleteSub(idUser, idChannel);
+	}
+	public List<Object[]> getListSubCountByIduser(int iduser) {
+		return dao.getListSubCountByIduser(iduser);
 	}
 }

@@ -89,6 +89,7 @@ public class VideoRestController {
 	@GetMapping("/videobyiduser")
 	public ResponseEntity<Map<String, Object>> getByIdUser(@RequestParam int iduser) {
 		Map<String, Object> response = new HashMap<>();
+		System.err.println(videoService.getAllVideoByIdUser(iduser).size());
 		response.put("total", videoService.getAllVideoByIdUser(iduser).size());
 		response.put("data", videoService.getAllVideoByIdUser(iduser));
 		return ResponseEntity.ok(response);

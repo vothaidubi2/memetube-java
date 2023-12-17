@@ -19,10 +19,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dao.ChannelDAO;
 import com.dao.UserDAO;
+import com.dao.WalletDAO;
 import com.dto.UserDto;
 import com.dto.UserLoginDto;
+import com.entity.Channel;
 import com.entity.Users;
+import com.entity.Wallet;
 import com.impl.CusUserDetailsImpl;
 
 @Service
@@ -35,6 +39,10 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserDAO dao;
+	@Autowired
+	private WalletDAO walletDao;
+	@Autowired ChannelDAO channelDao;
+	
 	public Users getByEmail(String email) {
 		return dao.findByEmail(email);
 	}
@@ -54,11 +62,24 @@ public class UserService implements UserDetailsService {
 	public void addUser(Users user) {
 		if (user.getStatus() == true) {
 			if (user.getGoogle() == true) {
+
 				if (dao.findByEmailAndGoogleTrue(user.getEmail()) == null) {
 					Date currentDate = new Date();
 					user.setDatecreated(currentDate);
 					user.setPassword(psE().encode(user.getPassword()));
 					dao.save(user);
+					Wallet wallet=new Wallet();
+					wallet.setUsers(user);
+					wallet.setBalance(0);
+					walletDao.save(wallet);
+					Channel channel=new Channel();
+					int atIndex=user.getEmail().indexOf('@');
+					channel.setChannelname(user.getEmail().substring(0,atIndex));
+					channel.setDatecreated(currentDate);
+					channel.setStatus(true);
+					channel.setUsers(user);
+					channelDao.save(channel);
+					
 				}
 			} else {
 				if (dao.findByEmailAndGoogleFalse(user.getEmail()) == null) {
@@ -66,6 +87,17 @@ public class UserService implements UserDetailsService {
 					user.setDatecreated(currentDate);
 					user.setPassword(psE().encode(user.getPassword()));
 					dao.save(user);
+//					Wallet wallet=new Wallet();
+//					wallet.setUsers(user);
+//					wallet.setBalance(0);
+//					walletDao.save(wallet);
+					Channel channel=new Channel();
+					int atIndex=user.getEmail().indexOf('@');
+					channel.setChannelname(user.getEmail().substring(0,atIndex));
+					channel.setDatecreated(currentDate);
+					channel.setStatus(true);
+					channel.setUsers(user);
+					channelDao.save(channel);
 				}
 			}
 		}
@@ -77,7 +109,6 @@ public class UserService implements UserDetailsService {
 	public Users Update( int id, String password, String oldPassword, String image) {
 
 	Users tempUser=	dao.findById(id).get();
-	System.err.println(psE().matches(oldPassword,tempUser.getPassword()));
 	if (psE().matches(oldPassword,tempUser.getPassword())) {
 		tempUser.setAvatar(image);
 		tempUser.setPassword(psE().encode(password));
@@ -97,7 +128,6 @@ public class UserService implements UserDetailsService {
 		return tempUser;
 	}
 	public Users UpdateRole(int id,Boolean role) {
-		System.err.println(role);
 		Users tempUser=	dao.findById(id).get();
 		tempUser.setRole(role);
 		dao.save(tempUser);

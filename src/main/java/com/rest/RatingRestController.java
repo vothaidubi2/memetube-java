@@ -1,5 +1,9 @@
 package com.rest;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.Rating;
+import com.entity.Video;
 import com.service.RatingService;
 
 @CrossOrigin("*")
@@ -63,4 +68,10 @@ public class RatingRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	@GetMapping("/getLikedvideo")
+	public ResponseEntity<List<Video>> getLikeVideo(@RequestParam int iduser) {
+
+			return ResponseEntity.ok(ratingService.getVideoLike(iduser));
+	}
+	
 }
