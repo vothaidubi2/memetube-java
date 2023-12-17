@@ -16,31 +16,33 @@ import java.util.Date;
 @Table(name = "report", catalog = "memetube")
 public class Report {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Idreport")
-    private Integer idreport;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Idreport")
+	private Integer idreport;
 
+	@Column(name = "Datecreate")
+	private Timestamp datecreate;
 
-    @Column(name = "Datecreate")
-    private Timestamp datecreate;
+	@Column(name = "Status")
+	private Boolean status;
+	
+	@Column(name = "Content")
+	private String content;
 
-    @Column(name = "Status")
-    private Boolean status;
+	@ManyToOne
+	@JoinColumn(name = "Idchannel")
+	private Channel channel;
 
-    @ManyToOne
-    @JoinColumn(name = "Idchannel")
-    private Channel channel;
+	@ManyToOne
+	@JoinColumn(name = "Idcomment")
+	private Comment comment;
 
-    @ManyToOne
-    @JoinColumn(name = "Idcomment")
-    private Comment comment;
+	@ManyToOne
+	@JoinColumn(name = "Idvideo")
+	private Video video;
 
-    @ManyToOne
-    @JoinColumn(name = "Idvideo")
-    private Video video;
-
-    @ManyToOne
-    @JoinColumn(name = "Iduserreport")
-    private Users userReport;
+	@ManyToOne
+	@JoinColumn(name = "Iduserreport")
+	private Users userReport;
 }
