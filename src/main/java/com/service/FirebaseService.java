@@ -35,7 +35,7 @@ public class FirebaseService {
 			LocalDateTime date = LocalDateTime.now();
 			int seconds = date.toLocalTime().toSecondOfDay();
 			String imageName = seconds + "-" + files.getOriginalFilename();
-			String bucketName = "memetube-fb4a6.appspot.com";
+			String bucketName = "memetube-2.appspot.com";
 			BlobId blobId = BlobId.of(bucketName, imageName);
 			BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(files.getContentType()).build();
 			Blob blob = storage.create(blobInfo, files.getBytes());
@@ -58,7 +58,7 @@ public class FirebaseService {
 			LocalDateTime date = LocalDateTime.now();
 			int seconds = date.toLocalTime().toSecondOfDay();
 			String imageName = seconds + "-" + files.getOriginalFilename();
-			String bucketName = "memetube-fb4a6.appspot.com";
+			String bucketName = "memetube-2.appspot.com";
 			BlobId blobId = BlobId.of(bucketName, imageName);
 			BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(files.getContentType()).build();
 			Blob blob = storage.create(blobInfo, files.getBytes());

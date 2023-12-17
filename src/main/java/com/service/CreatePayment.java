@@ -13,11 +13,14 @@ public class CreatePayment {
         String orderId = String.valueOf(System.currentTimeMillis());
         long amount = inputAmount;
         String orderInfo = "Pay the emoji on MemeTube";
-        String returnURL = "http://localhost:3000/success-transaction";
         String notifyURL = "http://localhost:3000/success-transaction";
+        String returnURL = "http://localhost:3000/success-transaction";
 
         Environment environment = Environment.selectEnv("dev");
         PaymentResponse captureWalletMoMoResponse = CreateOrderMoMo.process(environment, orderId, requestId, Long.toString(amount), orderInfo, returnURL, notifyURL, extraData, RequestType.CAPTURE_WALLET, Boolean.TRUE);
+
+//        PaymentResponse captureATMMoMoResponse = CreateOrderMoMo.process(environment, orderId, requestId, Long.toString(amount), orderInfo, returnURL, notifyURL, extraData, RequestType.PAY_WITH_ATM, null);
+
         return captureWalletMoMoResponse.getPayUrl();
     }
 
