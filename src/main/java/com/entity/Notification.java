@@ -10,6 +10,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -25,14 +26,16 @@ public class Notification {
 	@ManyToOne
 	@JoinColumn(name = "Iduser")
 	private Users user;
-
+	@ManyToOne
+	@JoinColumn(name = "Idusersend")
+	private Users usersend;
 	@Column(name = "Title", length = 100)
 	private String title;
 
 	@Column(name = "Contents", length = 200)
 	private String contents;
 
-	@Column(name = "Datecreate")
+	@Column(name = "Datecreated")
 	private Timestamp datecreate;
 
 	@Column(name = "Checked")

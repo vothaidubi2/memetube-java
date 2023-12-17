@@ -62,22 +62,40 @@ public class authController {
 
 	@PostMapping("/addAccount")
 	public ResponseEntity<?> addAccount(@RequestBody Users user) {
-		if(userDetailsService.getByEmail(user.getEmail()).getStatus()==false) {
-			return ResponseEntity.notFound().build();
-		}else {
-			userDetailsService.addUser(user);
+		if(userDetailsService.getByEmail(user.getEmail())==null) {
+		 {
+				userDetailsService.addUser(user);
 
-			UserLoginDto userdto = new UserLoginDto();
-			userdto.setEmail(user.getEmail());
-			userdto.setIsGoogle(user.getGoogle());
-			userdto.setPassword(user.getPassword());
-			String jwt = tokenProvider.createToken(userdto);
-			if (jwt.isEmpty()) {
+				UserLoginDto userdto = new UserLoginDto();
+				userdto.setEmail(user.getEmail());
+				userdto.setIsGoogle(user.getGoogle());
+				userdto.setPassword(user.getPassword());
+				String jwt = tokenProvider.createToken(userdto);
+				if (jwt.isEmpty()) {
+					return ResponseEntity.notFound().build();
+				} else {
+					return ResponseEntity.ok(jwt);
+				}
+			}
+		}else {
+			if(userDetailsService.getByEmail(user.getEmail()).getStatus()==false) {
 				return ResponseEntity.notFound().build();
-			} else {
-				return ResponseEntity.ok(jwt);
+			}else {
+//				userDetailsService.addUser(user);
+
+				UserLoginDto userdto = new UserLoginDto();
+				userdto.setEmail(user.getEmail());
+				userdto.setIsGoogle(user.getGoogle());
+				userdto.setPassword(user.getPassword());
+				String jwt = tokenProvider.createToken(userdto);
+				if (jwt.isEmpty()) {
+					return ResponseEntity.notFound().build();
+				} else {
+					return ResponseEntity.ok(jwt);
+				}
 			}
 		}
+
 
 
 	}

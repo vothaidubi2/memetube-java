@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import static jakarta.persistence.GenerationType.IDENTITY;
+
+import java.sql.Timestamp;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -35,4 +38,6 @@ public class Rating{
 	private Video video;
 	@Column(name = "Rate")
 	private Boolean rate;
+	@Column(name = "Datecreated")
+	private Timestamp datecreate;
 }

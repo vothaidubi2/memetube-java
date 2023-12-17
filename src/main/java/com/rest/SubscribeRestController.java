@@ -60,4 +60,9 @@ public class SubscribeRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	@GetMapping("/getCountSubById")
+	public ResponseEntity<List<Object[]>> getCountSubById(@RequestParam int iduser) {
+		return ResponseEntity.ok(service.getListSubCountByIduser(iduser));
+	}
+	
 }
